@@ -1,6 +1,6 @@
 from random import random
 import utils 
-import math
+import statistics
 from scipy.spatial import distance
 
 def k_means(arq, k, iteracoes):
@@ -17,10 +17,11 @@ def k_means(arq, k, iteracoes):
     clusters[1] = ["c2", 7.33, 140, 27.33]
     clusters[2] = ["c3", 5, 176.66, 52]
     print(clusters)
-    dist(clusters, datas)
+    atualiza_clusters(dist(clusters, datas), clusters)
 
 def dist(clusters, dados):
-    res = [], aux = []
+    res = []
+    aux = []
     for d in dados:
         aux.append(d[0])
         for c in clusters:
@@ -28,6 +29,27 @@ def dist(clusters, dados):
         res.append(aux.copy()) 
         aux.clear() 
     return res
+
+def atualiza_clusters(dados, clusters_antigos):
+    clusters = []
+    for i in clusters_antigos:
+        clusters.append([])
+    for d in dados:
+        menor = min(d[1:])
+        print(d.index(menor))
+        clusters[d.index(menor)-1].insert(d.index(menor)-1, d)
+    print(clusters)
+
+    centroide = []
+"""     
+    centroide = clusters_antigos.copy()
+    for c in centroide:
+        for i in range(1, len(c)):
+            c[i] = statistics.mean()
+
+    print(centroide) 
+"""
+
 
 
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
