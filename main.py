@@ -1,4 +1,5 @@
 from random import random
+from sre_compile import isstring
 import utils 
 import statistics
 from scipy.spatial import distance
@@ -16,8 +17,11 @@ def k_means(arq, k, iteracoes):
     clusters[0] = ["c1", 3.33, 116, 15]
     clusters[1] = ["c2", 7.33, 140, 27.33]
     clusters[2] = ["c3", 5, 176.66, 52]
-    print(clusters)
-    atualiza_clusters(dist(clusters, datas), clusters)
+
+    for i in range(k):
+        d = dist(clusters, datas)
+        clusters = atualiza_centroides(datas, d, clusters)
+        print(clusters)
 
 def dist(clusters, dados):
     res = []
@@ -30,26 +34,40 @@ def dist(clusters, dados):
         aux.clear() 
     return res
 
-def atualiza_clusters(dados, clusters_antigos):
+#def clusters_aleatorio(dados):
+
+def atualiza_centroides(dados, dist,clusters_antigos):
     clusters = []
+    
     for i in clusters_antigos:
         clusters.append([])
-    for d in dados:
+
+    for d in dist:
+        i_d = dist.index(d)
         menor = min(d[1:])
-        print(d.index(menor))
-        clusters[d.index(menor)-1].insert(d.index(menor)-1, d)
-    print(clusters)
+        i_menor = d.index(menor) - 1
+        clusters[i_menor].append(dados[i_d])
 
-    centroide = []
-"""     
-    centroide = clusters_antigos.copy()
-    for c in centroide:
-        for i in range(1, len(c)):
-            c[i] = statistics.mean()
+    centroides = []
+    for c in clusters:
+        centroides.append(centroide(c))
+    return centroides
 
-    print(centroide) 
-"""
 
+def centroide(cluster):
+    label = []
+    ctd = [label]
+    for i in range(len(cluster[0])-1):
+        ctd.append(0)
+    for c in cluster:
+        for i in range(len(c)):
+            if(isstring(c[i])):
+                label.append(c[i])
+            else:
+                ctd[i] += c[i] 
+    for i in range(1, len(ctd)):
+        ctd[i] = ctd[i] / len(cluster)
+    return ctd
 
 
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
