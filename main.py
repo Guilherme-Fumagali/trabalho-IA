@@ -5,17 +5,23 @@ from scipy.spatial import distance
 
 def k_means(arq, k, iteracoes):
     label, datas = utils.readTableTxt(arq);
-    
     clusters = clusters_aleatorios(datas, k)
-    clusters[0] = ["c1", 3.33, 116, 15]
-    clusters[1] = ["c2", 7.33, 140, 27.33]
-    clusters[2] = ["c3", 5, 176.66, 52]
 
-    for i in range(k):
+    for i in range(iteracoes):
         d = dist(clusters, datas)
         clusters = atualiza_centroides(datas, d, clusters)
-        print(clusters)
-    return clusters
+
+
+    dados_separados = []
+    i = 0
+    for c in clusters:
+        for label in c[0]:
+            dados_separados.append([label, i])
+        i += 1
+
+    for i in dados_separados:
+        print(i)    
+    return dados_separados
 
 def dist(clusters, dados):
     res = []
@@ -72,5 +78,5 @@ def centroide(cluster):
     return ctd
 
 
-arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-k_means(arq, 3, 10);
+arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/c2ds1-2sp.txt");
+k_means(arq, 2, 10);
