@@ -1,4 +1,5 @@
 from tokenize import Number
+from traceback import print_tb
 
 
 def readTableTxt(arq):
@@ -12,4 +13,4 @@ def readTableTxt(arq):
                 l[i] = float(l[i])
         data.append(l)
     data.remove(label)
-    return label, data;
+    return label, data
