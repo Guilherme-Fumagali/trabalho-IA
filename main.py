@@ -1,19 +1,12 @@
 from random import random
 from sre_compile import isstring
 import utils 
-import statistics
 from scipy.spatial import distance
 
 def k_means(arq, k, iteracoes):
     label, datas = utils.readTableTxt(arq);
-    clusters = []
-    for i in range(0, k):
-        while(True):
-            obj = datas[int((len(datas) - 1) * random())];
-            if obj not in clusters:
-                clusters.append(obj)
-                break
-
+    
+    clusters = clusters_aleatorios(datas, k)
     clusters[0] = ["c1", 3.33, 116, 15]
     clusters[1] = ["c2", 7.33, 140, 27.33]
     clusters[2] = ["c3", 5, 176.66, 52]
@@ -22,6 +15,7 @@ def k_means(arq, k, iteracoes):
         d = dist(clusters, datas)
         clusters = atualiza_centroides(datas, d, clusters)
         print(clusters)
+    return clusters
 
 def dist(clusters, dados):
     res = []
@@ -34,7 +28,15 @@ def dist(clusters, dados):
         aux.clear() 
     return res
 
-#def clusters_aleatorio(dados):
+def clusters_aleatorios(dados, k):
+    clusters = []
+    for i in range(0, k):
+            while(True):
+                obj = dados[int((len(dados) - 1) * random())];
+                if obj not in clusters:
+                    clusters.append(obj)
+                    break
+    return clusters
 
 def atualiza_centroides(dados, dist,clusters_antigos):
     clusters = []
