@@ -37,6 +37,11 @@ def single_link(arq, kMin, KMax):
             break
     
     particoes.reverse()
+
+    for particao in particoes[:KMax-kMin + 1]:
+        i = particoes.index(particao)
+        escrever_particao_no_arquivo(f'single_link_k_{len(particao)}.txt', particao)
+    
     return particoes[:KMax-kMin + 1]
 
 def complete_link(arq, kMin, KMax):
@@ -57,8 +62,11 @@ def complete_link(arq, kMin, KMax):
             break
     
     particoes.reverse()
-    for i in particoes[:KMax-kMin + 1]:
-        print(i)
+    
+    for particao in particoes[:KMax-kMin + 1]:
+        i = particoes.index(particao)
+        escrever_particao_no_arquivo(f'complete_link_k_{len(particao)}.txt', particao)
+    
     return particoes[:KMax-kMin + 1]
 
 def matriz_similaridade(dados):
@@ -226,9 +234,12 @@ def escrever_particao_no_arquivo(caminho, particao):
     with open(caminho, "w") as arq:
         for cluster in particao:
             cluster.sort()
-            print(cluster)
             for obj in cluster:
                 arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
 
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-print(k_means(arq, 2, 10))
+k_means(arq, 2, 10)
+arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
+single_link(arq, 2, 5)
+arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
+complete_link(arq, 2, 5)
