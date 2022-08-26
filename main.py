@@ -19,22 +19,34 @@ def k_means(arq, k, iteracoes):
             dados_separados.append([label, i])
         i += 1
 
-    for i in dados_separados:
-        print(i)    
     return dados_separados
 
 def single_link(arq, kMin, KMax):
     label, dados = utils.readTableTxt(arq)
     m_similaridade = matriz_similaridade(dados)
-    c = clusters_de_menor_dist(m_similaridade)
-    agrupa_single_link(m_similaridade, c[0], c[1])
+
+    particoes = []
+    while(True):
+        c = clusters_de_menor_dist(m_similaridade)
+        m_similaridade = agrupa_single_link(m_similaridade, c[0], c[1])
+        particao = []
+        for l in m_similaridade:
+            particao.append(l[0])
+        particoes.append(particao)
+        if(len(particao) == kMin):
+            break
+    
+    particoes.reverse()
+    for i in particoes:
+        print(i)
+    #print(particoes[kMin:]);
 
 def matriz_similaridade(dados):
     matriz_similaridade = []
     
     for d in dados:
         distancias = dist([d], dados)
-        linha = [d[0]]
+        linha = [[d[0]]]
         for i in range(len(distancias)):
             distancias[i] = remover_label(distancias[i])
         linha.append(utils.flat(distancias))
@@ -54,47 +66,38 @@ def dist(clusters, dados):
 
 def clusters_de_menor_dist(dados):
     menor = -1
-    i_1 = -1
-    i_2 = -1
+    i_1_aux = -1
+    i_2_aux = -1
     for d in dados:
+        i_1_aux += 1
         for i in d[1]:
+            i_2_aux += 1
             if(i != 0):
                 if(menor == -1):
                     menor = i
+                    i_1 = i_1_aux
+                    i_2 = i_2_aux
                 else:
                     if(i < menor):
                         menor = i
-                        i_1 = d.index(d[1])
-                        i_2 = d[1].index(menor)
+                        i_1 = i_1_aux
+                        i_2 = i_2_aux
+        i_2_aux = -1
                         
     return [i_1, i_2]
 
-"""         Homer Maggie Abe Selma
-    Homer
-    Maggie 
-    Abe
-    Selma
-
-    Homer, Maggie
-
-                    [Homer, Maggie] Abe Selma 
-    [Homer, Maggie]
-    Abe
-    Selma
- """
 def agrupa_single_link(matriz_similaridade, i_1, i_2):
     linha_1 = matriz_similaridade[i_1]
     linha_2 = matriz_similaridade[i_2]
 
-    labels = [linha_1[0], linha_2[0]]
+    labels = utils.flat([linha_1[0], linha_2[0]])
 
-    m_similaridade_sem_labels = matriz_similaridade.copy()
-    m_similaridade_sem_labels.remove(linha_1)
-    m_similaridade_sem_labels.remove(linha_2)
+    matriz_similaridade.remove(linha_1)
+    matriz_similaridade.remove(linha_2)
 
-    for d in m_similaridade_sem_labels:
+    for d in matriz_similaridade:
         d[1].pop(i_1)
-        d[1].pop(i_2-1)
+        d[1].pop(i_2 - 1)
 
     dist = []
     for i in range(len(linha_1[1])):
@@ -103,10 +106,17 @@ def agrupa_single_link(matriz_similaridade, i_1, i_2):
                 dist.append(linha_1[1][i])
             else:
                 dist.append(linha_2[1][i])
-    linha = [labels, dist]
-    """ Paramo aqui """
-    """ falta colocar a posicao zero da linha como zero e inserir na matriz de similaridade """
+    dist.insert(0, 0.0)
+    
+    i = 0
+    for d in dist[1:]:
+        matriz_similaridade[i][1].insert(0, d)
+        i += 1
 
+
+    linha = [labels, dist]
+    matriz_similaridade.insert(0, linha)
+    return matriz_similaridade
 
 
 def clusters_aleatorios(dados, k):
@@ -161,4 +171,4 @@ def remover_label(dado):
 
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
 #k_means(arq, 2, 10);
-single_link(arq, 0, 10);
+single_link(arq, 7, 9)
