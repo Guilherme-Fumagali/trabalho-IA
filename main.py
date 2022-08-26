@@ -1,4 +1,5 @@
 from random import random
+from runpy import run_path
 from sre_compile import isstring
 import utils 
 from scipy.spatial import distance
@@ -11,15 +12,12 @@ def k_means(arq, k, iteracoes):
         d = dist(clusters, datas)
         clusters = atualiza_centroides(datas, d, clusters)
 
-
-    dados_separados = []
-    i = 0
+    particao = []
     for c in clusters:
-        for label in c[0]:
-            dados_separados.append([label, i])
-        i += 1
+        particao.append(c[0])
 
-    return dados_separados
+    escrever_particao_no_arquivo("particao_kmedias.txt", particao)
+    return particao
 
 def single_link(arq, kMin, KMax):
     label, dados = utils.readTableTxt(arq)
@@ -223,6 +221,14 @@ def remover_label(dado):
             d.append(i)
     return d
 
+
+def escrever_particao_no_arquivo(caminho, particao):
+    with open(caminho, "w") as arq:
+        for cluster in particao:
+            cluster.sort()
+            print(cluster)
+            for obj in cluster:
+                arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
+
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-#k_means(arq, 2, 10);
-complete_link(arq, 1, 9)
+print(k_means(arq, 2, 10))
