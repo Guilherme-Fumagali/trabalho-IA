@@ -24,8 +24,10 @@ def k_means(arq, k, iteracoes):
 def single_link(arq, kMin, KMax):
     label, dados = utils.readTableTxt(arq)
     m_similaridade = matriz_similaridade(dados)
-
-    particoes = []
+    particao = []
+    for l in m_similaridade:
+        particao.append(l[0])
+    particoes = [particao]
     while(True):
         c = clusters_de_menor_dist(m_similaridade)
         m_similaridade = agrupa_single_link(m_similaridade, c[0], c[1])
@@ -37,7 +39,8 @@ def single_link(arq, kMin, KMax):
             break
     
     particoes.reverse()
-    for i in particoes:
+
+    for i in particoes[:KMax-kMin + 1]:
         print(i)
     #print(particoes[kMin:]);
 
@@ -171,4 +174,4 @@ def remover_label(dado):
 
 arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
 #k_means(arq, 2, 10);
-single_link(arq, 7, 9)
+single_link(arq, 3, 4)
