@@ -229,7 +229,6 @@ def remover_label(dado):
             d.append(i)
     return d
 
-
 def escrever_particao_no_arquivo(caminho, particao):
     with open(caminho, "w") as arq:
         for cluster in particao:
@@ -237,9 +236,12 @@ def escrever_particao_no_arquivo(caminho, particao):
             for obj in cluster:
                 arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
 
-arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-k_means(arq, 2, 10)
-arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-single_link(arq, 2, 5)
-arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
-complete_link(arq, 2, 5)
+def main():
+    arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
+    k_means(arq, 2, 10)
+    arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
+    single_link(arq, 2, 5)
+    arq = open("/home/gfumagali/Documents/Trabalho IA/trabalho-IA/datasets/simpsons.txt");
+    complete_link(arq, 2, 5)
+
+main()
