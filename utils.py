@@ -1,7 +1,3 @@
-from tokenize import Number
-from traceback import print_tb
-
-
 def readTableTxt(arq):
     data = []
     linhas = arq.readlines()
@@ -17,3 +13,10 @@ def readTableTxt(arq):
 
 def flat(l):
     return [item for sublist in l for item in sublist]
+
+def escrever_particao_no_arquivo(caminho, particao):
+    with open(caminho, "w") as arq:
+        for cluster in particao:
+            cluster.sort()
+            for obj in cluster:
+                arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
