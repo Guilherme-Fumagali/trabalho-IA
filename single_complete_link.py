@@ -48,7 +48,7 @@ def complete_link(arq, kMin, KMax):
     
     dados = []
     for particao in particoes[:KMax-kMin + 1]:
-        dados.append(utils.escrever_particao_no_arquivo(f'single_link_k_{len(particao)}.txt', particao))
+        dados.append(utils.escrever_particao_no_arquivo(f'complete_link_k_{len(particao)}.txt', particao))
     
     return dados
 
