@@ -17,6 +17,20 @@ def flat(l):
 def escrever_particao_no_arquivo(caminho, particao):
     with open(caminho, "w") as arq:
         for cluster in particao:
-            cluster.sort()
+            cluster.sort(key=__compar)
             for obj in cluster:
                 arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
+
+def __compar(x):
+    x = flat(x)
+    letras = ""
+    numeros = ""
+    for i in x:
+        if(i.isdigit()):
+            numeros += i
+        else:
+            letras += i
+    if len(numeros) > 0:
+        return int(numeros)
+    else:
+        return letras
