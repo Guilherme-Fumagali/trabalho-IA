@@ -12,7 +12,7 @@ def readTableTxt(arq):
     for linha in linhas:
         l = linha.split()
         for i in range(0, len(l)):
-            if(l[i].replace('.','',1).isdigit()):
+            if(l[i].replace('.','',1).replace('-','',1).isnumeric()):
                 l[i] = float(l[i])
         data.append(l)
     return data
