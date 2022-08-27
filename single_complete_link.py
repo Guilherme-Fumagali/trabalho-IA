@@ -21,14 +21,14 @@ def single_link(arq, kMin, KMax):
     
     particoes.reverse()
 
+    dados = []
     for particao in particoes[:KMax-kMin + 1]:
-        i = particoes.index(particao)
-        utils.escrever_particao_no_arquivo(f'single_link_k_{len(particao)}.txt', particao)
+        dados.append(utils.escrever_particao_no_arquivo(f'single_link_k_{len(particao)}.txt', particao))
     
-    return particoes[:KMax-kMin + 1]
+    return dados
 
 def complete_link(arq, kMin, KMax):
-    label, dados = utils.readTableTxt(arq)
+    dados = utils.readTableTxt(arq)
     m_similaridade = __matriz_similaridade(dados)
     particao = []
     for l in m_similaridade:
@@ -46,11 +46,11 @@ def complete_link(arq, kMin, KMax):
     
     particoes.reverse()
     
+    dados = []
     for particao in particoes[:KMax-kMin + 1]:
-        i = particoes.index(particao)
-        utils.escrever_particao_no_arquivo(f'complete_link_k_{len(particao)}.txt', particao)
+        dados.append(utils.escrever_particao_no_arquivo(f'single_link_k_{len(particao)}.txt', particao))
     
-    return particoes[:KMax-kMin + 1]
+    return dados
 
 
 def __matriz_similaridade(dados):

@@ -21,11 +21,14 @@ def flat(l):
     return [item for sublist in l for item in sublist]
 
 def escrever_particao_no_arquivo(caminho, particao):
+    p = []
     with open(caminho, "w") as arq:
         for cluster in particao:
             cluster.sort(key=__compar)
             for obj in cluster:
                 arq.write("{:<10} {:<1}\n".format(obj, particao.index(cluster)))
+                p.append([obj, particao.index(cluster)])
+    return p
 
 def __compar(x):
     x = flat(x)

@@ -15,8 +15,7 @@ def k_means(arq, k, iteracoes):
     for c in clusters:
         particao.append(c[0])
 
-    utils.escrever_particao_no_arquivo("particao_kmedias.txt", particao)
-    return particao
+    return utils.escrever_particao_no_arquivo("particao_kmedias.txt", particao)
 
 def __clusters_aleatorios(dados, k):
     clusters = []
