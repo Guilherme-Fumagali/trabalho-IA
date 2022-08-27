@@ -1,15 +1,21 @@
 def readTableTxt(arq):
     data = []
     linhas = arq.readlines()
-    label = linhas[0].split()
+
+    primeira_linha_string = True
+    for i in linhas[0].split():
+        if(i.isdigit()):
+            primeira_linha_string = False
+            break
+    if(primeira_linha_string):
+        linhas.pop(0)
     for linha in linhas:
         l = linha.split()
         for i in range(0, len(l)):
             if(l[i].replace('.','',1).isdigit()):
                 l[i] = float(l[i])
         data.append(l)
-    data.remove(label)
-    return label, data
+    return data
 
 def flat(l):
     return [item for sublist in l for item in sublist]

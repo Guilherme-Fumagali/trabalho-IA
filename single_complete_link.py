@@ -3,7 +3,7 @@ from sre_compile import isstring
 from scipy.spatial import distance
 
 def single_link(arq, kMin, KMax):
-    label, dados = utils.readTableTxt(arq)
+    dados = utils.readTableTxt(arq)
     m_similaridade = __matriz_similaridade(dados)
     particao = []
     for l in m_similaridade:

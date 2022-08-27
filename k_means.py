@@ -4,7 +4,7 @@ from sre_compile import isstring
 from scipy.spatial import distance
 
 def k_means(arq, k, iteracoes):
-    label, datas = utils.readTableTxt(arq);
+    datas = utils.readTableTxt(arq);
     clusters = __clusters_aleatorios(datas, k)
 
     for i in range(iteracoes):
