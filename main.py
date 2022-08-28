@@ -4,8 +4,8 @@ import single_complete_link
 from sklearn.metrics.cluster import adjusted_rand_score
 
 def main():
-    caminho_dados = "datasets\c2ds3-2g.txt"
-    caminho_clusters_real = "datasets\c2ds3-2gReal.clu"
+    caminho_dados = "datasets\c2ds1-2sp.txt"
+    caminho_clusters_real = "datasets\c2ds1-2spReal.clu"
 
     #Obtendo partição real
     dados_reais = utils.readTableTxt(open(caminho_clusters_real))
@@ -14,7 +14,7 @@ def main():
         particao_real.append(d[1])
         
     #k-medias
-    dados_k_medias = k_means.k_means(open(caminho_dados), 2, 7)
+    dados_k_medias = k_means.k_means(open(caminho_dados), 8, 7)
     particao_k_medias = []
     for d in dados_k_medias:
         particao_k_medias.append(d[1])
