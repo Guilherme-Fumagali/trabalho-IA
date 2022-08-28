@@ -14,7 +14,7 @@ def main():
         particao_real.append(d[1])
         
     #k-medias
-    dados_k_medias = k_means.k_means(open(caminho_dados), 8, 2)
+    dados_k_medias = k_means.k_means(open(caminho_dados), 2, 7)
     particao_k_medias = []
     for d in dados_k_medias:
         particao_k_medias.append(d[1])
