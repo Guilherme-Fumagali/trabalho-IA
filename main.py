@@ -4,8 +4,8 @@ import single_complete_link
 from sklearn.metrics.cluster import adjusted_rand_score
 
 def main():
-    caminho_dados = "datasets\c2ds1-2sp.txt"
-    caminho_clusters_real = "datasets\c2ds1-2spReal.clu"
+    caminho_dados = "datasets\c2ds3-2g.txt"
+    caminho_clusters_real = "datasets\c2ds3-2gReal.clu"
     KMin = 2 
     KMax = 5
 
