@@ -1,3 +1,14 @@
+""" 
+Grupo 01
+
+Guilherme Fumagali Marques       - 792182 
+Guilherme Silva de Camargo       - 792183
+Rodrigo Henrique Amaral Araújo   - 792241 
+Vinicius Gabriel Nanini da Silva - 795181
+
+Arquivo com as funções auxiliares para manipulação dos dados
+"""
+
 """ Recebe um arquivo e o armazena em memória """
 def readTableTxt(arq):
     data = []

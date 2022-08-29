@@ -16,16 +16,16 @@ from sklearn.metrics.cluster import adjusted_rand_score
 
 def main():
     #Dados necessários para a execução
-    caminho_dados = "./datasets/monkey.txt"
-    caminho_clusters_real = "./datasets/monkeyReal1.clu"
-    KMin = 5 
-    KMax = 12
+    caminho_dados = "./datasets/c2ds1-2sp.txt"
+    caminho_clusters_real = "./datasets/c2ds1-2spReal.clu"
+    KMin = 2 
+    KMax = 5
 
     #Obtendo partição real
     dados_reais = utils.readTableTxt(open(caminho_clusters_real)) #lendo o arquivo e salvando em memória
     particao_real = []
     for d in dados_reais:
-        particao_real.append(d[1] - 1) #vetor que armazena apenas os clusters dos objetos, em ordem
+        particao_real.append(d[1]) #vetor que armazena apenas os clusters dos objetos, em ordem
         
     #K-Médias
     print("K-médias")
