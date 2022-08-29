@@ -1,3 +1,4 @@
+""" Recebe um arquivo e o armazena em memória """
 def readTableTxt(arq):
     data = []
     linhas = arq.readlines()
@@ -17,9 +18,11 @@ def readTableTxt(arq):
         data.append(l)
     return data
 
+""" Recebe um vetor em mais de uma dimensão e o retorna em uma dimensão """
 def flat(l):
     return [item for sublist in l for item in sublist]
 
+""" Recebe uma partição e o escreve no arquivo segundo o caminho """
 def escrever_particao_no_arquivo(caminho, particao):
     objetos = []
     for cluster in particao:
@@ -31,6 +34,7 @@ def escrever_particao_no_arquivo(caminho, particao):
             arq.write("{:<10} {:<1}\n".format(obj[0], obj[1]))
     return objetos
 
+""" Função de comparação auxiliar ao sort() """
 def __compar(x):
     x = flat(x[0])
     letras = ""
