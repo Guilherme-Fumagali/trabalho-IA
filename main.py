@@ -4,10 +4,10 @@ import single_complete_link
 from sklearn.metrics.cluster import adjusted_rand_score
 
 def main():
-    caminho_dados = "datasets\c2ds3-2g.txt"
-    caminho_clusters_real = "datasets\c2ds3-2gReal.clu"
-    KMin = 2 
-    KMax = 5
+    caminho_dados = "datasets\monkey.txt"
+    caminho_clusters_real = "datasets\monkeyReal1.clu"
+    KMin = 5 
+    KMax = 12
 
     #Obtendo partição real
     dados_reais = utils.readTableTxt(open(caminho_clusters_real))
