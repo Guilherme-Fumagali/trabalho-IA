@@ -2,7 +2,7 @@
 
 
 
-##Integrantes:
+#Integrantes:
   - [Guilherme Fumagali Marques](https://github.com/Guilherme-Fumagali),        RA: 792182
   - [Guilherme Silva de Camargo](https://github.com/guilhermesdc),        RA: 792183
   - [Rodrigo Henrique Amaral Araujo](https://github.com/rodrigoamral),    RA: 792241
